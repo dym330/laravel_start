@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 global $head, $style, $body, $end;
 $head = '<html><head>';
@@ -29,11 +30,15 @@ function tag($tag, $txt) {
 
 class HelloController extends Controller
 {
-    public function __invoke() {
+    public function index(Request $request, Response $response) {
         global $head, $style, $body, $end;
 
         $html = $head . tag('title', 'Hello/Index') . $style . $body
-            . tag('h1', 'Single action') . tag('p', 'これはシングルアクションのコントローラです')
+            . tag('h1', 'Index')
+            . tag('h3', 'Request')
+            . tag('pre', $request->path())
+            . tag('h3', 'Response')
+            . tag('pre', $response->status())
             . $end;
         return $html;
     }
