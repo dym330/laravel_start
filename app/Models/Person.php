@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
-    use HasFactory;
+    public function boards() {
+        return $this->hasMany(Board::class);
+    }
 
     protected $guarded = array('id');
 
